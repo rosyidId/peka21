@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 py-5">
+            <h4>{{ title }}</h4>
+            <p class="mb-4">Silahkan masukkan data diri anda dengan Benar.</p>
+            <form action="{% url 'daftar' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group first">
+                    {{ form.as_p }}
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1"><span class="caption"> Apakah data yang anda masukkan sudah benar</span>
+                        <div class="control__checkbox"></div>
+                    </label>
+                  </div>
+                  <br>
+                <button type="submit" class="btn btn-primary" >Save</button>
+                <!-- <input type="submit" class="btn btn-primary" value="save"> -->
+                <a class="btn btn-danger" href="{% url 'peserta' %}">
+                    <i class="mdi mdi-plus"></i>
+                Cancel</a>
+                
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock  %}
+

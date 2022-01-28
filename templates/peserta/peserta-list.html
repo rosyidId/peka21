@@ -1,0 +1,88 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+  Tables
+{% endblock title %}
+
+{% block stylesheet %}
+  
+{% endblock stylesheet %}
+
+{% block content %}
+  <div class="content-wrappe">
+      <div class="row">
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class=""> {{ title }}</h2>
+                    <div>
+                        <a class="btn btn-primary" href="{% url 'daftar' %}">
+                            <i class="mdi mdi-plus"></i>
+                        Tambah</a>
+                        <br>
+                        <br>
+                    </div>
+                    <table class="table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Jurusan</th>
+                                <th>No Hp</th>
+                                <th>Email</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for peserta in object_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ peserta.nama }}</td>
+                                <td>{{ peserta.alamat }}</td>
+                                <td>{{ peserta.tempat_lahir }}</td>
+                                <td>{{ peserta.tanggal_lahir }}</td>
+                                <td>{{ peserta.jenis_kelamin }}</td>
+                                <td>{{ peserta.jurusan }}</td>
+                                <td>{{ peserta.nomer_telpon }}</td>
+                                <td>{{ peserta.email }}</td>
+                                <td>
+                                    <a href="{% url 'detail' pk=peserta.id %}" class="btn btn-primary">
+                                        Details
+                                    </a>
+                                    <a href="{% url 'edit' peserta.id %}" class="btn btn-success">
+                                      Ubah
+                                    </a>
+                                    <button data-toggle="modal" data-target="#hapus-{{ peserta.id }}" class="btn btn-danger">Hapus</button>
+                                </td> 
+                                <div class="modal" id="hapus-{{ peserta.id }}">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <div class="modal-title">
+                                            <h3>Hapus</h3>
+                                          </div>
+                                        </div>
+                                        <div class="modal-body">
+                                          Apakah anda yakin ingin menghapus <strong>{{ peserta.nama | upper }}</strong>?
+                                        </div>
+                                        <div class="modal-footer">
+                                          <a href="{% url 'delete' peserta.id %}" class="btn btn-danger">Hapus</a>
+                                          <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>                              
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>r
+{% endblock content %}
